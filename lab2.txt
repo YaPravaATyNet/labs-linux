@@ -39,16 +39,13 @@ command (m for help):w
 e2fsck -fn /dev/sdb1
 
 fdisk /dev/sdb
-command (m for help):d
-Selected partition 1
-Partition 1 is deleted
 command (m for help): n
 Partition type
 	p	primary (1 primary, 0 extended, 4free)
 	e	extended 
 Select (default p): p
 Partiotion number (2-4, default 1): 2
-First sector (718848-2097151, default 2048):
+First sector (718848-2097151, default 71884):
 Last sector, +sector or +size{K, M, G} (718848-2097151, default 2097151): +12M
 command (m for help):w
 mkfs.ext4 -b 4096 /dev/sdb2
@@ -68,7 +65,7 @@ First sector (743424-2097151, default 743424):
 Last sector, +sector or +size{K, M, G} (743424-2097151, default 2097151):
 command (m for help):w
 
-fdisk /dev/sdb3
+fdisk /dev/sdb
 command (m for help):n
 Partition type
 	p	primary (0 primary, 0 extended, 4free)
@@ -99,3 +96,14 @@ mkdir /mnt/share
 mount -t vboxsf share /mnt/share
 Добавляем в /etc/fstab
 /share /mnt/share vboxsf defaults,uid=0,gid=0,ro 0 0
+
+sfdisk -d /dev/sdс | sfdisk /dev/sdb
+mdadm --create --verbose /dev/md0 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1
+mdadm --create --verbose /dev/md2 --level=1 --raid-devices=2 /dev/sdb2 /dev/sdc2
+# cat /proc/mdstat
+mkfs.ext4 /dev/md0
+mkfs.ext4 /dev/md2
+mkdir /mnt/md0
+mount /dev/md0 /mnt/md0
+mkdir /mnt/md2
+mount /dev/md2 /mnt/md2
