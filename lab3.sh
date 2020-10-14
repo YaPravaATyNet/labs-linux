@@ -24,6 +24,6 @@ cp /bin/nano /home/test14/nano
 chown u1:u1 /home/test14/nano
 chmod u+s /home/test14/nano
 mkdir test15
-echo Hello world > test15/seret_file
+echo Hello world > test15/secret_file
 chmod 444 test15/secret_file
 chmod 111 test15
