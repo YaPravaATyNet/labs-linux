@@ -1,0 +1,11 @@
+Name: two_pack
+Version: 1.0
+Release: 1
+Summary: A sample package, installing two package
+Group: Applications/Productivity
+License: GPLv3+
+
+Requires: nano vim  
+
+%description
+Install two pack: vim nano
